@@ -1,0 +1,40 @@
+//Apply sliding window 2 time, 1 time for true and 1 for false;
+class Solution {
+public:
+    int maxConsecutiveAnswers(string a, int k) {
+        int ogk=k;
+        int i=0,j=0,n=a.length(),count=0,ans=INT_MIN;
+        while(j<n){
+            if(a[j]=='T' || k>0){
+                if(a[j]=='F')k--;
+                j++;
+                count++;
+                ans=max(count,ans);
+            }
+            else{
+                ans=max(count,ans);
+                if(a[i]=='F')k++;
+                i++;
+                count--;
+                
+            }
+        }
+        i=0,j=0,count=0,k=ogk;
+        while(j<n){
+            if(a[j]=='F' || k>0){
+                if(a[j]=='T')k--;
+                j++;
+                count++;
+                ans=max(count,ans);
+            }
+            else{
+                ans=max(count,ans);
+                if(a[i]=='T')k++;
+                i++;
+                count--;
+            }
+        }
+        return ans;
+        
+    }
+};
